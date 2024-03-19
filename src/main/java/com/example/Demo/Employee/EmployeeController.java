@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 
 @RestController
-@RequestMapping(path = "api/v1/productCard")
+@RequestMapping(path = "api/employee")
 public class EmployeeController {
 
     private final EmployeeService employeeService;
@@ -27,19 +27,19 @@ public class EmployeeController {
         return "EmployeeController is responding.";
     }
 
-    @GetMapping("/getEmployee/{type}")
-    public Person getEmployee(@PathVariable String type, @NotNull @RequestBody String firstName, @NotNull @RequestBody String lastName, @NotNull @RequestBody String mobile) throws JAXBException, IOException {
+    @GetMapping("/getEmployee/type={type}&mobile={mobile}&lastname={lastname}&firstname={firstname}")
+    public Person getEmployee(@PathVariable(name = "type") String type, @PathVariable(name = "mobile") String mobile, @PathVariable(name = "lastname") String lastname,  @PathVariable(name = "firstname") String firstname) throws JAXBException, IOException {
         if(type.equalsIgnoreCase("internal")){
             InternalEmployee internalEmployee = new InternalEmployee();
-            internalEmployee.setFirstName(firstName);
-            internalEmployee.setLastName(lastName);
+            internalEmployee.setFirstName(firstname);
+            internalEmployee.setLastName(lastname);
             internalEmployee.setMobile(mobile);
             return employeeService.getInternalEmployee(internalEmployee);
         }
         else if (type.equalsIgnoreCase("external")){
             ExternalEmployee externalEmployee = new ExternalEmployee();
-            externalEmployee.setFirstName(firstName);
-            externalEmployee.setLastName(lastName);
+            externalEmployee.setFirstName(firstname);
+            externalEmployee.setLastName(lastname);
             externalEmployee.setMobile(mobile);
             return employeeService.getExternalEmployee(externalEmployee);
         }
@@ -48,15 +48,15 @@ public class EmployeeController {
         }
     }
 
-    @DeleteMapping("/deleteEmployee/{id}")
+    @DeleteMapping(path = "deleteEmployee/{id}")
     public boolean deleteEmployee(@PathVariable String employeeId) throws IOException {
         return employeeService.deleteEmployeeOfId(employeeId);
     }
 
-    @PostMapping("/addEmployee/{type}")
+    @PostMapping(path = "addEmployee/{type}")
     public void addEmployee(@PathVariable String type, @RequestBody Person employee) throws IOException, JAXBException {
         if(type.equalsIgnoreCase("internal")){
-        employeeService.createInternalEmployee( (InternalEmployee) employee);
+            employeeService.createInternalEmployee( (InternalEmployee) employee);
         }
         else if(type.equalsIgnoreCase("external")){
             employeeService.createExternalEmployee( (ExternalEmployee) employee);
@@ -81,3 +81,4 @@ public class EmployeeController {
 
 
 }
+

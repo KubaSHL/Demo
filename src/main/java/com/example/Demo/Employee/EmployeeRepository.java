@@ -26,7 +26,26 @@ public class EmployeeRepository {
     public <T extends Person> Person find(T employee) throws JAXBException, IOException {
 
         JAXBContext context = JAXBContext.newInstance(Person.class);
-        return (Person) context.createUnmarshaller().unmarshal(new FileReader(employee.getFilePath()));
+
+        File file;
+
+        if(employee instanceof InternalEmployee) {
+            file = new File("D:/internal");
+        }else {
+            file = new File("D:/external");
+
+        }
+        if( file.exists() && file.isDirectory() )
+        {
+            String[] files = file.list();
+            for( String fileName : Objects.requireNonNull(files))
+            {
+                if( fileName.contains(employee.getMobile()) && fileName.contains(employee.getLastName()) && fileName.contains(employee.getFirstName()))
+                    return (Person) context.createUnmarshaller().unmarshal(new FileReader(file.getPath() + "/" + fileName));
+
+            }
+        }
+        return null;
     }
 
     public <T extends Person> void delete(T employee) throws IOException {

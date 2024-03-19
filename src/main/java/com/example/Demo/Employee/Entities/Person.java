@@ -3,34 +3,26 @@ package com.example.Demo.Employee.Entities;
 import jakarta.xml.bind.annotation.*;
 
 
-@XmlTransient
-//@XmlType(propOrder = {"ID","FirstName","LastName","Mobile","Email","Pesel"})
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlSeeAlso({InternalEmployee.class, ExternalEmployee.class})
 public abstract class Person {
-    @XmlElement(name = "ID")
-    private String employeeId;
+    private String id;
 
-    @XmlElement(name = "FirstName")
     private String firstName;
 
-    @XmlElement(name = "LastName")
     private String lastName;
 
-    @XmlElement(name = "Mobile")
     private String mobile;
 
-    @XmlElement(name = "Email")
     private String email;
 
-    @XmlElement(name = "Pesel")
     private String pesel;
 
     public String getId() {
-        return employeeId;
+        return id;
     }
 
-    public void setId(String employeeId) {
-        this.employeeId = employeeId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getFirstName() {

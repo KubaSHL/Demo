@@ -2,11 +2,8 @@ package com.example.Demo.Employee.Entities;
 
 import jakarta.xml.bind.annotation.*;
 
-@XmlRegistry
-@XmlSeeAlso({Person.class})
-@XmlRootElement(name = "ExternalEmployee")
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"ID","FirstName","LastName","Mobile","Email","Pesel"})
+@XmlType(name = "external")
+@XmlRootElement
 public class ExternalEmployee extends Person {
     @XmlTransient
     private String typeOfContract = "external";
@@ -18,7 +15,6 @@ public class ExternalEmployee extends Person {
         if(!employee.getEmail().isEmpty()) this.setEmail(employee.getEmail());
         if(!employee.getMobile().isEmpty()) this.setMobile(employee.getMobile());
         if(!employee.getPesel().isEmpty()) this.setPesel(employee.getPesel());
-
     }
 
     public ExternalEmployee() {
