@@ -1,7 +1,6 @@
 package com.example.Demo.Employee;
 
 import com.example.Demo.Employee.Entities.InternalEmployee;
-import com.example.Demo.Employee.Entities.ObjectFactory;
 import com.example.Demo.Employee.Entities.Person;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
