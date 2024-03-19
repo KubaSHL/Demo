@@ -101,7 +101,7 @@ public class EmployeeRepository {
         if(!employee.getEmail().isEmpty()) fileEmployeeData.setEmail(employee.getEmail());
         if(!employee.getMobile().isEmpty()) fileEmployeeData.setMobile(employee.getMobile());
         if(!employee.getPesel().isEmpty()) fileEmployeeData.setPesel(employee.getPesel());
-
+        file.renameTo(new File(fileEmployeeData.getFilePath()));
         marshaller.marshal(fileEmployeeData, file);
     }
 
