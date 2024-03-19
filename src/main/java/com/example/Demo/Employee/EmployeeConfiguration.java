@@ -2,7 +2,6 @@ package com.example.Demo.Employee;
 
 import com.example.Demo.Employee.Entities.ExternalEmployee;
 import com.example.Demo.Employee.Entities.InternalEmployee;
-import com.example.Demo.Employee.Entities.Person;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

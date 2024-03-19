@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 
 @RestController
-@RequestMapping(path = "api/v1/productCard")
+@RequestMapping(path = "api/employee")
 public class EmployeeController {
 
     private final EmployeeService employeeService;
@@ -26,21 +26,21 @@ public class EmployeeController {
     public String ping(){
         return "EmployeeController is responding.";
     }
-
+//, @NotNull @RequestBody String lastName, @NotNull @RequestBody String mobile
     @GetMapping("/getEmployee/{type}")
-    public Person getEmployee(@PathVariable String type, @NotNull @RequestBody String firstName, @NotNull @RequestBody String lastName, @NotNull @RequestBody String mobile) throws JAXBException, IOException {
+    public Person getEmployee(@PathVariable String type, @NotNull @RequestBody Person person) throws JAXBException, IOException {
         if(type.equalsIgnoreCase("internal")){
             InternalEmployee internalEmployee = new InternalEmployee();
-            internalEmployee.setFirstName(firstName);
-            internalEmployee.setLastName(lastName);
-            internalEmployee.setMobile(mobile);
+            internalEmployee.setFirstName(person.getFirstName());
+            internalEmployee.setLastName(person.getLastName());
+            internalEmployee.setMobile(person.getMobile());
             return employeeService.getInternalEmployee(internalEmployee);
         }
         else if (type.equalsIgnoreCase("external")){
             ExternalEmployee externalEmployee = new ExternalEmployee();
-            externalEmployee.setFirstName(firstName);
-            externalEmployee.setLastName(lastName);
-            externalEmployee.setMobile(mobile);
+            externalEmployee.setFirstName(person.getFirstName());
+            externalEmployee.setLastName(person.getLastName());
+            externalEmployee.setMobile(person.getMobile());
             return employeeService.getExternalEmployee(externalEmployee);
         }
         else {
